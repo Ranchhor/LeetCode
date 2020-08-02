@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root == NULL) return 0;
+        int depth = 0;
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(NULL);
+        depth++;
+        while(!q.empty()) {
+            TreeNode* root = q.front();
+            q.pop();
+            if(root == NULL && q.empty()) break;
+            else if(root == NULL) {
+                depth++;
+                q.push(NULL);
+            } else {
+                if(root->left) q.push(root->left);
+                if(root->right) q.push(root->right);
+            }
+        }
+        
+        return depth;
+    }
+};
