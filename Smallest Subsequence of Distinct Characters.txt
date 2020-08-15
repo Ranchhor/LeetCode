@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string smallestSubsequence(string text) {
+         vector<int> count(256,0);
+        vector<bool> vis(256,false);
+        string s = text;
+        for(char c: s) count[c]++;
+        string res = "";
+        for(int i=0; i<s.length(); i++) {
+            count[s[i]]--;
+            if(vis[s[i]]) continue;
+            while(!res.empty() && s[i] < res.back() && count[res.back()]) {
+                vis[res.back()] = false;
+                res.pop_back();
+            }
+            res += s[i];
+            vis[s[i]] = true;
+        }
+        
+        return res;
+    }
+};
